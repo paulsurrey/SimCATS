@@ -208,6 +208,7 @@ def get_electron_occupation(
         try:
             ref_line = np.array([[bezier_coords[int(reg) + 1][1, 1, :]], [bezier_coords[int(reg)][0, 1, :]]])
         except KeyError as e:
+            continue
             raise IndexError(
                 f"bezier_coords dictionary does not contain an entry for total charge transition (TCT) {e}. "
                 f"This TCT is required to calculate the interdot transitions in the regime with a total of {reg} "

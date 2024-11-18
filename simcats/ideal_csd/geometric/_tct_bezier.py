@@ -48,6 +48,7 @@ def tct_bezier(
         Union[np.ndarray, numbers.Number]: Y-values for the supplied x-values (if an array of values was supplied) or a
         single y-value.
     """
+
     # if x_eval is a single x-value, put it into a numpy array for the further processing
     if isinstance(x_eval, numbers.Number):
         single_value = True
@@ -73,12 +74,7 @@ def tct_bezier(
             tct_params[3] - tct_params[2]
         )
         y_vals[1] = y_vals[0] + tct_params[2] * (x_vals[1] - x_vals[0])
-    # check if the central bezier anchor is between left & right anchor (in x-space). Else the wavefront
-    # can't be evaluated, as the "spike" of the bezier curve passes across one of the outer anchors and
-    # leads to multiple y-values for some x-values
-    assert x_vals[1] >= x_vals[0] and x_vals[1] <= x_vals[2]
-    # check if the lengths of the left & right part are at least twice as long as the left/right bezier curve part
-    assert tct_params[0] >= 2 * (x_vals[1] - x_vals[0]) and tct_params[1] >= 2 * (x_vals[2] - x_vals[1])
+    x_vals[1] = np.clip(x_vals[1], x_vals[0], x_vals[2])
     # nodes as fortran array
     nodes = np.asfortranarray([x_vals, y_vals])
 

@@ -355,7 +355,7 @@ class Simulation:
             self.__sensor = SensorGeneric()
         # check sensor config for implementations of the correct interface
         elif isinstance(sensor, SensorInterface):
-            self.__sensor = deepcopy(sensor)
+            self.__sensor = sensor
         # raise an error if an invalid configuration has been supplied
         else:
             raise ValueError(

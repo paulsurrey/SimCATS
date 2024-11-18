@@ -162,6 +162,11 @@ class RandomTelegraphNoise(DistortionInterface):
         except AttributeError:
             height = self.height
 
+        # fixing the scale to 1
+        if scale < 1:
+            scale = 1
+
+        assert scale>=1, "The scale is used as the 1/probability within numpy.random.geometric, which requires that 0<p<=1 "
         return random_telegraph_noise(original, scale, std, height, self.rng)
 
     def __repr__(self):

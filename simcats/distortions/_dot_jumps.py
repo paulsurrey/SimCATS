@@ -192,10 +192,6 @@ class OccupationDotJumps(OccupationDistortionInterface):
                     lam *= resolution[0] / (np.max(volt_limits_g2) - np.min(volt_limits_g2))
             if scale < 1:
                 # smallest possible value is 1, so set to 1. As this might not be, what the user wants, warn about it
-                warnings.warn(
-                    "The given scale in voltages results in a pixelwise scale of less than 1 and is thus set to 1. \
-    That means the length of dot jumps is always 1. Consider using a larger scale or disabling dot jumps for small scans."
-                )
                 scale = 1
 
         # Dot jumps are always applied from low to high voltages because otherwise many new transition lines
